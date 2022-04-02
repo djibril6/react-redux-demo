@@ -1,2 +1,2 @@
 export { default as appTheme, customTheme } from "./theme";
-export * from "./types";
+export { default as axiosClient } from "./api";

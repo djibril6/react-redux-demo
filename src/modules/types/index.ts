@@ -1,6 +1,12 @@
+import store from "store";
+
 export enum EGender {
   MALE = "male",
   FEMALE = "female",
+}
+export enum EUserRole {
+  USER = "user",
+  ADMIN = "admin",
 }
 export enum EUserAction {
   SET_USER,
@@ -8,11 +14,18 @@ export enum EUserAction {
   SET_TOKEN,
   CLEAR,
 }
+export enum EUserStatus {
+  OPENED = "opened",
+  CLOSED = "closed",
+}
 
 export interface IUser {
+  id: string;
   name: string;
   email: string;
   gender: EGender;
+  status: boolean;
+  role: EUserRole;
 }
 
 export type UserState = {
@@ -32,3 +45,6 @@ export type TUserAction =
       payload: string;
     }
   | { type: EUserAction.CLEAR };
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

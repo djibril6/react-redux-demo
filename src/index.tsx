@@ -1,18 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { appTheme } from "modules";
-import { Provider } from "react-redux";
+import { appTheme, axiosClient } from "modules";
+
 import store from "store";
+import { configure } from "axios-hooks";
+
+configure({ axios: axiosClient });
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={appTheme}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
