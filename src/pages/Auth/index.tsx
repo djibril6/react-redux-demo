@@ -32,8 +32,8 @@ export const Auth: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "fake1@example.com",
+      password: "password1",
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
