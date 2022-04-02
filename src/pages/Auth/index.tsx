@@ -10,10 +10,10 @@ import { EUserAction } from "modules/types";
 export const Auth: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  const [{ loading: loading }, login] = useAxios<any>(
+  const [{ loading }, login] = useAxios<any>(
     {
       url: "/auth/login",
       method: "POST",
@@ -59,12 +59,7 @@ export const Auth: React.FC = () => {
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
-    formik;
-
-  const handleShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <Box height="100vh" display="flex" alignItems="center">

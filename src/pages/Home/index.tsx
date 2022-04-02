@@ -15,22 +15,6 @@ import { useAppSelector } from "hooks";
 import { EUserStatus, IUser } from "modules/types";
 import React, { useCallback, useEffect } from "react";
 
-function createData(name: string, email: string, status: boolean) {
-  return {
-    name,
-    email,
-    status: status ? EUserStatus.OPENED : EUserStatus.CLOSED,
-  };
-}
-
-const rows = [
-  createData("Frozen yoghurt", "159", true),
-  createData("Ice cream sandwich", "159", true),
-  createData("Eclair", "159", true),
-  createData("Cupcake", "159", false),
-  createData("Gingerbread", "159", true),
-];
-
 type UserListResult = {
   results: IUser[];
   page: number;
@@ -42,23 +26,18 @@ type UserListResult = {
 export const Home: React.FC = () => {
   const userData = useAppSelector((state) => state.users);
 
-  const [
-    { data: userList = {} as UserListResult, loading: loading },
-    fetchUser,
-  ] = useAxios<UserListResult>(
-    {
-      url: "/users",
-      method: "GET",
-    },
-    {
-      manual: true,
-    }
-  );
+  const [{ data: userList = {} as UserListResult, loading }, fetchUser] =
+    useAxios<UserListResult>(
+      {
+        url: "/users",
+        method: "GET",
+      },
+      {
+        manual: true,
+      }
+    );
 
-  const [
-    { data: userUpdated = {} as IUser, loading: loadingUpdate },
-    updateUser,
-  ] = useAxios<IUser>(
+  const [, updateUser] = useAxios<IUser>(
     {
       method: "PATCH",
     },
